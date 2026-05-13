@@ -7,7 +7,7 @@ require("dotenv").config();
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// ─── Helper: Audit Log ────────────────────────────────────────────────────────
+
 
 const logAction = async (
   action,
@@ -51,7 +51,7 @@ const maskApplication = (app, employerId) => {
   return { ...obj, isUnlocked };
 };
 
-// ─── GET /api/applications ────────────────────────────────────────────────────
+
 
 exports.getApplications = async (req, res) => {
   try {
@@ -70,10 +70,10 @@ exports.getApplications = async (req, res) => {
       let filter;
 
       if (global === "true") {
-        // Mode Recherche Globale : l'employeur voit tous les candidats qualifiés (masqués)
+
         filter = { status: "qualified" };
       } else {
-        // Mode Pipeline : l'employeur voit les candidatures liées à ses propres offres
+
         const jobs = await Job.find({ employer: req.userId }).select("_id");
         const jobIds = jobs.map((j) => j._id);
         filter = { job: { $in: jobIds } };
@@ -87,7 +87,7 @@ exports.getApplications = async (req, res) => {
         .populate("job", "title cabinet location")
         .sort({ createdAt: -1 });
 
-      // Masquer les coordonnées si non débloqué
+   
       applications = apps.map((app) => maskApplication(app, req.userId));
       return res.json({ applications });
     }
