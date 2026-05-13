@@ -1,0 +1,26 @@
+{
+  "name": "efficience-recrute",
+  "version": "1.0.0",
+  "description": "Medical & Dental Recruitment Platform",
+  "private": true,
+  "scripts": {
+    "setup": "echo 'Setting up project...' && cd backend && npm install && cd ../fac-projet && npm install && echo 'Setup complete!'",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "backend": "cd backend && npm start",
+    "frontend": "cd fac-projet && npm run dev",
+    "build": "cd fac-projet && npm run build",
+    "test": "echo 'Testing...' && cd backend && npm test",
+    "preview": "cd fac-projet && npm run preview"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.2",
+    "connect-mongodb-session": "^5.0.0",
+    "csurf": "^1.11.0",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.2",
+    "mongoose": "^9.6.1",
+    "path": "^0.12.7"
+  }
+}
